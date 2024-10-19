@@ -14,6 +14,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const User = require("./model/clogin.js");
 const CompanyProfile = require("./model/companyProfile.js");
+const StudentProfile = require("./model/student.js");
 // const Profile = require("./model/profile.js");
 
 const session = require("express-session");
@@ -131,16 +132,35 @@ app.post(
   }),
   async (req, res) => {
     let { username } = req.body;
+    let profile = req.body;
     req.session.user = { username };
+    console.log(req.session.user);
     let user = await User.findOne({username: username});
     req.flash("success", "Welcome to Placement Management System!");
     if (user.designation == "student") {
-      res.render("studentdash.ejs", {user});
+      res.render("studentdash.ejs", {user, profile});
     } else {
       res.render("faculty.ejs");
     }
   }
 );
+
+app.post("/studentdash", async (req, res) => {
+  let {course, year, cgpa, backlog, resume} = req.body;
+  let profile = req.body;
+  console.log(req.session)
+  let user = await User.findOne({username: req.session.username});
+  let student = new StudentProfile({
+    user: user._id,
+    course: course,
+    year: year,
+    cgpa: cgpa,
+    backlog: backlog,
+    resume: resume
+  });
+  await student.save();
+  res.render("studentdash.ejs", {profile});
+})
 
 app.get("/register", (req, res) => {
   res.render("register.ejs");
