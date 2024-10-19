@@ -1,1 +1,1 @@
-# EduQuest
+# Placement Management System
