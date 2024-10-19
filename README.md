@@ -1,1 +1,1 @@
-# EduQuest
+# EduQuest - Explore, Learn & Achieve
