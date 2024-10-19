@@ -26,6 +26,7 @@ async function quizGenerator(topic) {
   ]
 }
 Make sure that:
+-No Preamble
 - Each question has 4 answer options.
 - Provide the correct answer for each question under 'correctAnswer'.`;
     const result = await model.generateContent(prompt);
@@ -35,7 +36,8 @@ Make sure that:
   }
 
 quizGenerator("linkedList").then(ans => {
-    console.log(ans);
+    let a = ans;
+    console.log(a);
 }).catch(err => {
     console.error(err);
 });
