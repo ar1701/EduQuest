@@ -206,7 +206,7 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 async function quizGenerator(topic) {
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-  const prompt = `Based on the topic of ${topic} in the context of Computer Science, create a multiple-choice quiz with 5 questions. Please format the response in JSON with the following structure:
+  const prompt = `Based on the topic of ${topic} in the context of Engineering, create a multiple-choice quiz with 5 questions. Please format the response in JSON with the following structure:
 {
   "title": "MCQ Quiz on ${topic}",
   "questions": [
@@ -252,6 +252,7 @@ app.post("/practice", async (req, res) => {
 
     // Attempt to parse the generated quiz string into an object
     const quiz = JSON.parse(generatedQuiz);
+    req.session.quiz = quiz; // Store the generated quiz in the session
     
     res.render("quiz.ejs", { quiz }); // Render the quiz page with the generated quiz
   } catch (err) {
@@ -261,21 +262,41 @@ app.post("/practice", async (req, res) => {
 });
 
 
-app.post("/quiz", (req, res) => {
-  if (!quiz) {
-    return res.status(400).json({ error: "Quiz not found." }); 
-  }
+app.post("/submit-quiz", (req, res) => {
+  // console.log("Received quiz submission");
+  // console.log("Request body:", req.body);
+  // console.log("Session:", req.session);
 
   const userAnswers = req.body.userAnswers;
+  const quiz = req.session.quiz;
+
+  if (!quiz) {
+    console.error("Quiz not found in session");
+    return res.status(400).json({ error: "Quiz not found in session." });
+  }
+
+
+
   let correctCount = 0;
-  quiz.questions.forEach((question, index) => {
+  const results = quiz.questions.map((question, index) => {
     const correctAnswer = question.correctAnswer;
     const userAnswer = userAnswers[`q${index}`];
-
-    if (userAnswer === correctAnswer) {
-      correctCount++;
-    }
+    const isCorrect = userAnswer === correctAnswer;
+    if (isCorrect) correctCount++;
+    return {
+      question: question.question,
+      userAnswer,
+      correctAnswer,
+      isCorrect
+    };
   });
 
-  res.json({ correctCount });
+  console.log("Quiz Results:", { correctCount, totalQuestions: quiz.questions.length, results });
+
+  res.json({ 
+    correctCount, 
+    totalQuestions: quiz.questions.length,
+    results
+  });
 });
+
