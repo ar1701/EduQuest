@@ -1,31 +1,65 @@
-body {
-    background-color: #f8f9fa; /* Light background */
-    font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    color: #007bff; /* Bootstrap primary color */
-  }
-  
-  .card {
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  }
-  
-  .card-body {
-    padding: 20px; /* Additional padding */
-  }
-  
-  .mb-4 {
-    margin-bottom: 1.5rem; /* Spacing between questions */
-  }
-  
-  hr {
-    border-top: 1px solid #007bff; /* Color for the horizontal line */
-  }
-  
-  .btn {
-    padding: 10px 20px; /* Button padding */
-    font-size: 18px; /* Button font size */
-  }
-  
+/* General body styling */
+.container {
+  padding: 40px;
+  background-color: #ff8c6b;; /* Light background */
+  font-family: "Poppins", sans-serif;
+  color: black;
+  font-weight: 700;
+  border: 5px solid rgb(204, 13, 45);
+  border-radius: 3.3rem;
+}
+
+/* Heading styling */
+h1 {
+  color: #075e79;
+  font-weight: bolder; /* Bootstrap primary color */
+}
+
+/* Styling the quiz question card */
+.quiz-card {
+  background-color: white; /* Orange-brown background color */
+  border-radius: 3.3rem; /* Rounded corners */
+  color: black; /* White text color */
+  padding: 20px;
+  box-shadow: 0 10px 10px rgba(23, 58, 153, 0.2);
+  width: 70%;
+  margin-left: 150px;
+}
+
+/* Correct answer styling */
+.correct {
+  color: #28a745; /* Green for correct answers */
+  font-weight: bold;
+}
+
+/* Incorrect answer styling */
+.incorrect {
+  color: #dc3545; /* Red for incorrect answers */
+  font-weight: bold;
+}
+
+/* Button styling */
+.btn-primary {
+  padding: 10px 20px; /* Increased padding */
+  font-size: 18px;
+  margin-top: 10px;/* Bigger button font size */
+}
+
+/* Form check (radio button) styling */
+.form-check-input {
+  margin-right: 10px;
+}
+
+.form-check-label {
+  color: #000; /* Make the label text white */
+}
+
+/* Custom card container styling */
+.card-body {
+  padding: 15px;
+}
+
+/* Optional: Adding some styling to the results section */
+#results h3 {
+  color: #007bff;
+}
