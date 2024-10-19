@@ -130,11 +130,12 @@ app.post(
     failureFlash: true,
   }),
   async (req, res) => {
-    let { username, designation } = req.body;
+    let { username } = req.body;
     req.session.user = { username };
+    let user = await User.findOne({username: username});
     req.flash("success", "Welcome to Placement Management System!");
-    if (designation == "Student") {
-      res.render("student.ejs");
+    if (user.designation == "student") {
+      res.render("studentdash.ejs", {user});
     } else {
       res.render("faculty.ejs");
     }
@@ -149,7 +150,7 @@ app.post("/register", async (req, res) => {
   try {
     let { username, name, email, phone, designation, department, password } =
       req.body;
-    req.session.user = { username, email, name, phone };
+    req.session.user = { username, email, name, designation };
     const newUser = new User({
       username,
       name,
@@ -163,8 +164,7 @@ app.post("/register", async (req, res) => {
 
     await newUser.save();
     if (newUser.designation == "Student") {
-      // res.render("student.ejs");
-      res.redirect("/login");
+      res.render("studentdash.ejs");
     } else {
       // res.render("faculty.ejs");
       res.redirect("/login");
@@ -291,8 +291,7 @@ app.post("/submit-quiz", (req, res) => {
     };
   });
 
-  console.log("Quiz Results:", { correctCount, totalQuestions: quiz.questions.length, results });
-
+ 
   res.json({ 
     correctCount, 
     totalQuestions: quiz.questions.length,

@@ -1,23 +1,19 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
+const User = require("./clogin.js");
 
 
-const userSchema = new Schema({
-    name:{
-        type: String,
-        required: true,
-    },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
+const studentProfileSchema = new Schema({
+  owner:{
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
-  phone: Number,
-  desgination: String,
-  department: String,
-
+  year: String,
+  semester: String,
+  course: String,
+  cgpa: Number,
+  resume: String,
 });
-userSchema.plugin(passportLocalMongoose);
-const User = new mongoose.model("User", userSchema);
-module.exports = User;
+const studentProfile = new mongoose.model("StudentProfile", studentProfileSchema);
+module.exports = studentProfile;

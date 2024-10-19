@@ -14,7 +14,7 @@ const userSchema = new Schema({
     required: true,
   },
   phone: Number,
-  desgination: String,
+  designation: String,
   department: String,
 
 });
