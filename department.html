@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Placement Statistics - CUSAT</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>CUSAT Placement Statistics</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="department-header">
+            <h2>Department Placement Statistics</h2>
+        </section>
+
+        <section class="charts-container">
+            <div class="chart-wrapper">
+                <h3>Placement Trends (2021-2023)</h3>
+                <canvas id="barChart"></canvas>
+            </div>
+            <div class="chart-wrapper">
+                <h3>Placement Rate (2023)</h3>
+                <canvas id="pieChart"></canvas>
+            </div>
+        </section>
+
+        <section class="recruiters">
+            <h3>Mass Recruiters</h3>
+            <div class="recruiter-logos"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 CUSAT Placement Cell</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
