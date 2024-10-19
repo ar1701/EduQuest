@@ -63,27 +63,35 @@
         }
         .profile-summary {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
-        .profile-item {
-            background-color: var(--light);
-            padding: 1rem;
+        .profile-summary-row-2 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .profile-item label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        .profile-item input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
             border-radius: 4px;
+            font-size: 1rem;
+            color: var(--dark);
+            background-color: var(--light);
+            box-sizing: border-box;
         }
-        .placement-status {
+        .update-button-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             margin-top: 1rem;
-        }
-        .status-item {
-            text-align: center;
-        }
-        .event-item, .application-item, .interview-item, .resource-item {
-            margin-bottom: 1rem;
-            padding: 1rem;
-            background-color: var(--light);
-            border-radius: 4px;
         }
         .btn {
             background-color: var(--primary);
@@ -102,62 +110,62 @@
         .btn:active {
             transform: translateY(0);
         }
-        .search-bar {
-            width: 100%;
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .job-listing {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background-color: var(--light);
-            margin-bottom: 0.5rem;
-            border-radius: 4px;
-        }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <a href="#" class="navbar-brand">EduFlex</a>
+        <a href="#" class="navbar-brand">CusaQuest</a>
         <div class="navbar-links">
             <a href="#">Home</a>
-            <a href="#">Progress</a>
-            <a href="#">Support</a>
+            <a href="#">Assessment</a>
+            <a href="#">Resume ATS Calculation</a>
+            <a href="#">AI Support</a>
+            
         </div>
     </nav>
 
     <div class="content-wrapper">
         <section class="dashboard-section">
             <h2 class="section-title">Profile Summary</h2>
-            <div class="profile-summary">
+            <form id="profile-form">
+                <div class="profile-summary">
+                    <div class="profile-item">
+                        <label for="name"><strong>Name:</strong></label>
+                        <input type="text" id="name" name="name" value="{{ profile.name }}">
+                    </div>
+                    <div class="profile-item">
+                        <label for="course"><strong>Course:</strong></label>
+                        <input type="text" id="course" name="course" value="{{ profile.course }}">
+                    </div>
+                </div>
+
+                <div class="profile-summary-row-2">
+                    <div class="profile-item">
+                        <label for="year"><strong>Year:</strong></label>
+                        <input type="text" id="year" name="year" value="{{ profile.year }}">
+                    </div>
+                    <div class="profile-item">
+                        <label for="cgpa"><strong>CGPA:</strong></label>
+                        <input type="text" id="cgpa" name="cgpa" value="{{ profile.cgpa }}">
+                    </div>
+                    <div class="profile-item">
+                        <label for="backlogs"><strong>No of Backlogs:</strong></label>
+                        <input type="text" id="backlogs" name="backlogs" value="{{ profile.backlogs }}">
+                    </div>
+                    <div class="profile-item">
+                        <label for="resumeLink"><strong>Resume Link:</strong></label>
+                        <input type="text" id="resumeLink" name="resumeLink" value="{{ profile.resumeLink }}">
+                    </div>
+                </div>
+
                 <div class="profile-item">
-                    <strong>Name:</strong> John Doe
+                    <strong>Profile Completion:</strong> <span id="profile-completion">{{ profile.profileCompletion }}%</span>
                 </div>
-                <div class="profile-item">
-                    <strong>Course:</strong> Computer Science
+
+                <div class="update-button-container">
+                    <button type="button" class="btn" onclick="updateProfile()">Update</button>
                 </div>
-                <div class="profile-item">
-                    <strong>Year:</strong> 3rd Year
-                </div>
-                <div class="profile-item">
-                    <strong>Profile Completion:</strong> 80%
-                </div>
-            </div>
-            <div class="placement-status">
-                <div class="status-item">
-                    <strong>Applied:</strong> 5
-                </div>
-                <div class="status-item">
-                    <strong>Interviewed:</strong> 2
-                </div>
-                <div class="status-item">
-                    <strong>Offers:</strong> 1
-                </div>
-            </div>
+            </form>
         </section>
 
         <section class="dashboard-section">
@@ -260,7 +268,28 @@
     </div>
 
     <script>
-        // You can add JavaScript here for interactive features
+      
+        function calculateProfileCompletion() {
+            const fields = ['name', 'course', 'year', 'cgpa', 'backlogs', 'resumeLink'];
+            let filledFields = 0;
+
+            fields.forEach(field => {
+                const value = document.getElementById(field).value;
+                if (value.trim() !== '') {
+                    filledFields++;
+                }
+            });
+
+            // Calculate completion percentage
+            const completionPercentage = Math.round((filledFields / fields.length) * 100);
+            document.getElementById('profile-completion').textContent = `${completionPercentage}%`;
+        }
+
+        // Attach event listeners to inputs to recalculate on change
+        document.querySelectorAll('.profile-item input').forEach(input => {
+            input.addEventListener('input', calculateProfileCompletion);
+        });
+
     </script>
 </body>
 </html>
