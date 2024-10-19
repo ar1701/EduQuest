@@ -146,10 +146,14 @@ app.post(
 );
 
 app.post("/studentdash", async (req, res) => {
-  let {course, year, cgpa, backlog, resume} = req.body;
+  let {name, course, year, cgpa, backlog, resume} = req.body;
   let profile = req.body;
-  console.log(req.session)
-  let user = await User.findOne({username: req.session.username});
+  let user = await User.findOne({username: req.session.user.username});
+  const user1 = await User.findOneAndUpdate(
+    { username: req.session.user.username },
+    { name: name },
+    { new: true }
+  );
   let student = new StudentProfile({
     user: user._id,
     course: course,
@@ -159,7 +163,7 @@ app.post("/studentdash", async (req, res) => {
     resume: resume
   });
   await student.save();
-  res.render("studentdash.ejs", {profile});
+  res.render("studentdash.ejs", {user1, profile});
 })
 
 app.get("/register", (req, res) => {
