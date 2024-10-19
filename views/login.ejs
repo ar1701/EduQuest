@@ -13,7 +13,7 @@
             <div class="inner-box">
                 <div class="forms-wrap">
                     
-                    <form action="index.html" autocomplete="off" class="sign-in-form">
+                    <form action="/login" autocomplete="off" class="sign-in-form" method="post">
                         
 
                         <div class="heading">
@@ -24,13 +24,13 @@
 
                         <div class="actual-form">
                             <div class="input-wrap">
-                                <input name = "username" type="text" minlength="4" class="input-field" autocomplete="off" required>
-                                <label>Username</label>
+                                <input name = "username" type="text" minlength="4" class="input-field" placeholder="username" autocomplete="off" required>
+                                <label></label>
                             </div>
 
                             <div class="input-wrap">
-                                <input name = "password" type="password" minlength="4" class="input-field" autocomplete="off" required>
-                                <label>Password</label>
+                                <input name = "password" type="password" minlength="4" class="input-field" placeholder="password" autocomplete="off" required>
+                                <label></label>
                             </div>
 
                             <input type="submit" value="Sign In" class="sign-btn">
