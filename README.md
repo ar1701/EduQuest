@@ -11,3 +11,4 @@ In an age where information flows faster than ever, the traditional methods of c
 We envision a transformative platform that centralizes and streamlines the flow of information, ensuring that no student is left behind. Our goal is to create a space where notifications and opportunities are readily accessible, empowering students to take charge of their career journeys. By eliminating the chaos of scattered communications, we foster a more organized and supportive environment that encourages proactive engagement and informed decision-making. 
 
 
+
