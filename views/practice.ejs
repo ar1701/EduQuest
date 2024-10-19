@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice</title>
+</head>
+<body>
+    <h1><%= quiz.title %></h1>
+<form id="quizForm">
+  <% quiz.questions.forEach(function(question, index) { %>
+    <div class="question">
+      <h3><%= index + 1 %>. <%= question.question %></h3>
+      <% question.options.forEach(function(option) { %>
+        <input type="radio" name="q<%= index %>" value="<%= option %>"> <%= option %><br>
+      <% }) %>
+    </div>
+  <% }) %>
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+    const correctAnswers = <%= JSON.stringify(quiz.questions.map(q => q.correctAnswer)) %>;
+  
+    document.getElementById('quizForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+  
+      let correctCount = 0;
+      const totalQuestions = correctAnswers.length;
+  
+      correctAnswers.forEach((answer, index) => {
+        const selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
+        if (selectedOption && selectedOption.value === answer) {
+          correctCount++;
+        }
+      });
+  
+      alert(`You got ${correctCount} out of ${totalQuestions} correct.`);
+    });
+  </script>
+  
+</body>
+</html>
