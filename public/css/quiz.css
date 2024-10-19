@@ -1,0 +1,31 @@
+body {
+    background-color: #f8f9fa; /* Light background */
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    color: #007bff; /* Bootstrap primary color */
+  }
+  
+  .card {
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .card-body {
+    padding: 20px; /* Additional padding */
+  }
+  
+  .mb-4 {
+    margin-bottom: 1.5rem; /* Spacing between questions */
+  }
+  
+  hr {
+    border-top: 1px solid #007bff; /* Color for the horizontal line */
+  }
+  
+  .btn {
+    padding: 10px 20px; /* Button padding */
+    font-size: 18px; /* Button font size */
+  }
+  
