@@ -193,3 +193,18 @@ app.post("/add-company", isLoggedIn, async (req, res) => {
     res.redirect("/main");
 } )
 
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const fs = require("fs");
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+
+async function quizGenerator(topic) {
+  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const prompt = `On the basis of ${topic}, Create a MCQ Quiz of 15 Questions.`;
+  const result = await model.generateContent(prompt);
+  const response = await result.response;
+  const text = response.text();
+  return text;
+}
+
+
+
