@@ -12,6 +12,7 @@ if(process.env.NODE_ENV != "production") {
   const methodOverride = require("method-override");
   const ejsMate = require("ejs-mate");
   const User = require("./model/user.js");
+  const CompanyProfile = require("./model/companyProfile.js");
   // const Profile = require("./model/profile.js");
   
   const session = require("express-session");
@@ -180,4 +181,15 @@ if(process.env.NODE_ENV != "production") {
   app.all("*",  (req, res, next) => {
     res.redirect("/index");
   });
+
+app.get("/add-company", isLoggedIn, (req, res) => {
+    res.render("add-company.ejs");
+})
+
+app.post("/add-company", isLoggedIn, async (req, res) => {
+    let { name, base, cgpa, role } = req.body;
+    let newCompany = new CompanyProfile({ name, base, cgpa, role });
+    await newCompany.save();
+    res.redirect("/main");
+} )
 
