@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - EduFlex</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff8c6b;
+            --light: #FFF5F2;
+            --dark: #3D3D3D;
+        }
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .navbar-links a {
+            color: var(--dark);
+            text-decoration: none;
+            margin-left: 1rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .navbar-links a:hover {
+            color: var(--primary);
+        }
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .dashboard-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .section-title {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+        .profile-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .profile-item {
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+        .placement-status {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+        .status-item {
+            text-align: center;
+        }
+        .event-item, .application-item, .interview-item, .resource-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background-color: var(--light);
+            border-radius: 4px;
+        }
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        .btn:hover {
+            background-color: #ff7a54;
+            transform: translateY(-2px);
+        }
+        .btn:active {
+            transform: translateY(0);
+        }
+        .search-bar {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .job-listing {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: var(--light);
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">EduFlex</a>
+        <div class="navbar-links">
+            <a href="#">Home</a>
+            <a href="#">Progress</a>
+            <a href="#">Support</a>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <section class="dashboard-section">
+            <h2 class="section-title">Profile Summary</h2>
+            <div class="profile-summary">
+                <div class="profile-item">
+                    <strong>Name:</strong> John Doe
+                </div>
+                <div class="profile-item">
+                    <strong>Course:</strong> Computer Science
+                </div>
+                <div class="profile-item">
+                    <strong>Year:</strong> 3rd Year
+                </div>
+                <div class="profile-item">
+                    <strong>Profile Completion:</strong> 80%
+                </div>
+            </div>
+            <div class="placement-status">
+                <div class="status-item">
+                    <strong>Applied:</strong> 5
+                </div>
+                <div class="status-item">
+                    <strong>Interviewed:</strong> 2
+                </div>
+                <div class="status-item">
+                    <strong>Offers:</strong> 1
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="event-item">
+                <h3>Job Fair</h3>
+                <p>Date: October 15, 2024</p>
+                <button class="btn">RSVP</button>
+                <button class="btn">View Details</button>
+            </div>
+            <div class="event-item">
+                <h3>Workshop: Interview Skills</h3>
+                <p>Date: October 20, 2024</p>
+                <button class="btn">RSVP</button>
+                <button class="btn">View Details</button>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2 class="section-title">Job and Internship Listings</h2>
+            <input type="text" class="search-bar" placeholder="Search for jobs...">
+            <div class="job-listing">
+                <div>
+                    <h3>Software Engineer</h3>
+                    <p>ABC Corp</p>
+                </div>
+                <div>
+                    <button class="btn">Apply</button>
+                    <button class="btn">Save</button>
+                </div>
+            </div>
+            <div class="job-listing">
+                <div>
+                    <h3>Marketing Intern</h3>
+                    <p>XYZ Ltd</p>
+                </div>
+                <div>
+                    <button class="btn">Apply</button>
+                    <button class="btn">Save</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2 class="section-title">My Applications</h2>
+            <div class="application-item">
+                <h3>Software Developer Intern - Tech Innovators Inc.</h3>
+                <p>Status: Application Under Review</p>
+            </div>
+            <div class="application-item">
+                <h3>Data Analyst - DataCrunch Solutions</h3>
+                <p>Status: Interview Scheduled</p>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2 class="section-title">Interview Schedule</h2>
+            <div class="interview-item">
+                <h3>October 25, 2024 - 2:00 PM</h3>
+                <p>Company: DataCrunch Solutions</p>
+                <button class="btn">Prepare</button>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2 class="section-title">Resources and Learning Materials</h2>
+            <div class="resource-item">
+                <h3>Resume Template</h3>
+                <button class="btn">Download</button>
+            </div>
+            <div class="resource-item">
+                <h3>Interview Tips</h3>
+                <button class="btn">Read More</button>
+            </div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2 class="section-title">Feedback and Reviews</h2>
+            <button class="btn">View Company Feedback</button>
+            <button class="btn">View Peer Reviews</button>
+        </section>
+
+        <section class="dashboard-section">
+            <h2 class="section-title">Notifications and Alerts</h2>
+            <div class="notification-item">Application Status Updated</div>
+            <div class="notification-item">New Job Posting Alert</div>
+        </section>
+
+        <section class="dashboard-section">
+            <h2 class="section-title">Support and FAQs</h2>
+            <button class="btn">Help Center</button>
+            <button class="btn">Contact Support</button>
+        </section>
+
+        <section class="dashboard-section">
+            <h2 class="section-title">Networking and Collaboration</h2>
+            <button class="btn">Join Discussion Forum</button>
+            <button class="btn">View Mentorship Opportunities</button>
+        </section>
+    </div>
+
+    <script>
+        // You can add JavaScript here for interactive features
+    </script>
+</body>
+</html>
