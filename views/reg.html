@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in & Sign up Form</title>
+    <link rel="stylesheet" href="reg.css">
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="form-section">
+                <header>Registration Form</header>
+                <form action="#" class="form">
+                    <div class="input-box">
+                        <label>User Name</label>
+                        <input type="text" placeholder="Enter user name" required />
+                    </div>
+
+                    <div class="input-box">
+                        <label>Name</label>
+                        <input type="text" placeholder="Enter full name" required />
+                    </div>
+
+                    <div class="input-box">
+                        <label>Email Address</label>
+                        <input type="text" placeholder="Enter email address" required />
+                    </div>
+
+                    <div class="column">
+                        <div class="input-box">
+                            <label>Phone Number</label>
+                            <input type="number" placeholder="Enter phone number" required />
+                        </div>
+                    </div>
+
+                    <div class="gender-box">
+                        <h3>Your Designation</h3>
+                        <div class="gender-option">
+                            <div class="gender">
+                                <input type="radio" id="check-student" name="designation" checked />
+                                <label for="check-student">Student</label>
+                            </div>
+                            <div class="gender">
+                                <input type="radio" id="check-faculty" name="designation" />
+                                <label for="check-faculty">Faculty</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-box address">
+                        <label>Department</label>
+                        <div class="column">
+                            <div class="select-box">
+                                <select required>
+                                    <option value="">Select your department</option>
+                                    <option>School Of Engineering</option>
+                                    <option>Dept. Of Computer Applications</option>
+                                    <option>Dept. Of Bio-Technology</option>
+                                    <option>Dept. Of Ship Technology</option>
+                                    <option>Dept. Of Ship Instrumentation</option>
+                                    <option>School of Legal Studies</option>
+                                    <option>Center For Business Studies</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Password</label>
+                        <input type="password" placeholder="Enter password" required />
+                    </div>
+
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+
+            <div class="carousel-section">
+                <div class="carousel">
+                    <div class="images-wrapper">
+                        <img src="/images/image1.jpg" class="image img-1 show" alt="Image 1">
+                        <img src="/images/image2.jpg" class="image img-2" alt="Image 2">
+                        <img src="/images/image3.jpg" class="image img-3" alt="Image 3">
+                    </div>
+
+                    <div class="bullets">
+                        <span class="active"></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src = "reg.js"></script>
+</body>
+</html>

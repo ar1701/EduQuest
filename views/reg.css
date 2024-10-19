@@ -1,0 +1,197 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background:  #ff8c6b; /* Change to peach color */
+}
+
+main {
+  display: flex; /* Flex container to hold form and carousel */
+  justify-content: center;
+}
+
+.container {
+  display: flex; /* Flex layout for form and carousel */
+  gap: 30px; /* Space between form and carousel */
+  max-width: 900px; /* Set a max-width for the container */
+  width: 100%;
+}
+
+.form-section {
+  flex: 1; /* Allow the form to take available space */
+  background: #fff; /* White background for the form section */
+  padding: 25px;
+  border-radius: 15px; /* Curved corners */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-section {
+  flex: 1; /* Make carousel take the same space as the form */
+  background: #fff; /* White background for the carousel */
+  padding: 25px;
+  border-radius: 15px; /* Curved corners */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.carousel {
+  position: relative;
+}
+
+.images-wrapper {
+  overflow: hidden; /* Hide overflow for carousel effect */
+  height: 500px; /* Set a fixed height for the carousel */
+}
+
+.image {
+  width: 100%; /* Full width of the carousel */
+  height: 100%; /* Full height for the images */
+  display: none; /* Hide all images by default */
+  object-fit: cover; /* Ensure images cover the area without distortion */
+}
+
+.image.show {
+  display: block; /* Show the active image */
+}
+
+.bullets {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.bullets span {
+  height: 12px; /* Bullet size */
+  width: 12px; /* Bullet size */
+  border-radius: 50%;
+  background: #ccc; /* Bullet color */
+  margin: 0 5px; /* Space between bullets */
+  cursor: pointer;
+}
+
+.bullets span.active {
+  background: #7a54d8; /* Active bullet color */
+}
+
+.form {
+  margin-top: 30px;
+}
+
+.input-box {
+  width: 100%;
+  margin-top: 10px; /* Reduced margin for more compact spacing */
+}
+
+.input-box label {
+  color: #333;
+}
+
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 35px; /* Reduced height for input fields */
+  width: 100%;
+  outline: none;
+  font-size: 0.9rem; /* Slightly smaller font size */
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 10px; /* Reduced padding for a more compact look */
+}
+
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+
+.form .gender-box {
+  margin-top: 20px;
+}
+
+.gender-box h3 {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.form :where(.gender-option, .gender) {
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+  flex-wrap: wrap;
+}
+
+.form .gender {
+  column-gap: 5px;
+}
+
+.gender input {
+  accent-color: #7a54d8; /* Change to a lighter purple */
+}
+
+.form :where(.gender input, .gender label) {
+  cursor: pointer;
+}
+
+.gender label {
+  color: #707070;
+}
+
+.address :where(input, .select-box) {
+  margin-top: 15px;
+}
+
+.select-box select {
+  height: 35px; /* Reduced height for the select box */
+  width: 100%;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 0.9rem; /* Slightly smaller font size */
+}
+
+.form button {
+  height: 45px; /* Reduced height for the button */
+  width: 100%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 20px; /* Reduced margin above button */
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #7a54d8; /* Change to a lighter purple */
+}
+
+.form button:hover {
+  background: rgb(88, 56, 250);
+}
+
+@media screen and (max-width: 500px) {
+  main {
+    flex-direction: column; /* Stack form and carousel on smaller screens */
+  }
+
+  .carousel-section {
+    margin-top: 20px; /* Add space above carousel */
+  }
+
+  .form-section {
+    margin-bottom: 20px; /* Space below the form */
+  }
+}
