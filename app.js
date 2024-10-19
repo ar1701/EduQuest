@@ -119,58 +119,60 @@ app.listen(port, () => {
   console.log("listening to the port: https://localhost:" + port);
 });
 
-// app.get("/login", (req, res) => {
-//   res.render("login.ejs");
-// });
+app.get("/login", (req, res) => {
+  res.render("login.ejs");
+});
 
-// app.post(
-//   "/login",
-//   passport.authenticate("local", {
-//     failureRedirect: "/login",
-//     failureFlash: true,
-//   }),
-//   async (req, res) => {
-//     let { username, designation } = req.body;
-//     req.session.user = { username };
-//     req.flash("success", "Welcome to Placement Management System!");
-//     if (designation == "Student") {
-//       res.render("student.ejs");
-//     } else {
-//       res.render("faculty.ejs");
-//     }
-//   }
-// );
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    failureRedirect: "/login",
+    failureFlash: true,
+  }),
+  async (req, res) => {
+    let { username, designation } = req.body;
+    req.session.user = { username };
+    req.flash("success", "Welcome to Placement Management System!");
+    if (designation == "Student") {
+      res.render("student.ejs");
+    } else {
+      res.render("faculty.ejs");
+    }
+  }
+);
 
-// app.get("/signup", (req, res) => {
-//   res.render("signup.ejs");
-// });
+app.get("/register", (req, res) => {
+  res.render("register.ejs");
+});
 
-// app.post("/signup", async (req, res) => {
-//   try {
-//     let { username, name, email, phone, designation, department, password } =
-//       req.body;
-//     req.session.user = { username, email, name, phone };
-//     const newUser = new User({
-//       username,
-//       name,
-//       email,
-//       phone,
-//       designation,
-//       department,
-//     });
+app.post("/register", async (req, res) => {
+  try {
+    let { username, name, email, phone, designation, department, password } =
+      req.body;
+    req.session.user = { username, email, name, phone };
+    const newUser = new User({
+      username,
+      name,
+      email,
+      phone,
+      designation,
+      department,
+    });
 
-//     await User.register(newUser, password);
+    await User.register(newUser, password);
 
-//     await newUser.save();
-//     if (newUser.designation == "Student") {
-//       res.render("student.ejs");
-//     } else {
-//       res.render("faculty.ejs");
-//     }
-//   } catch (e) {
-//     res.redirect("/signup");
-//   }
-// });
+    await newUser.save();
+    if (newUser.designation == "Student") {
+      // res.render("student.ejs");
+      res.redirect("/login");
+    } else {
+      // res.render("faculty.ejs");
+      res.redirect("/login");
+    }
+  } catch (e) {
+    res.redirect("/login");
+  }
+});
 
 // app.get("/logout", function (req, res) {
 //   req.logout(function (err) {
