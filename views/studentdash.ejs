@@ -135,34 +135,34 @@
     <div class="content-wrapper">
         <section class="dashboard-section">
             <h2 class="section-title">Profile Summary</h2>
-            <form id="profile-form">
+            <form id="profile-form" action="/studentdash" method="post">
                 <div class="profile-summary">
                     <div class="profile-item">
                         <label for="name"><strong>Name:</strong></label>
-                        <input type="text" id="name" name="name" value="{{ profile.name }}">
+                        <input type="text" id="name" name="name" value=" <%= user.name %> ">
                     </div>
                     <div class="profile-item">
                         <label for="course"><strong>Course:</strong></label>
-                        <input type="text" id="course" name="course" value="{{ profile.course }}">
+                        <input type="text" id="course" name="course" value="<%= (profile.course) ? profile.course : 'xxxxxx' %>">
                     </div>
                 </div>
 
                 <div class="profile-summary-row-2">
                     <div class="profile-item">
                         <label for="year"><strong>Year:</strong></label>
-                        <input type="text" id="year" name="year" value="{{ profile.year }}">
+                        <input type="text" id="year" name="year" value="<%= (profile.year) ? profile.year : 'xxxxxx' %>">
                     </div>
                     <div class="profile-item">
                         <label for="cgpa"><strong>CGPA:</strong></label>
-                        <input type="text" id="cgpa" name="cgpa" value="{{ profile.cgpa }}">
+                        <input type="text" id="cgpa" name="cgpa" value="<%= (profile.cgpa) ? profile.cgpa : 'xxxxxx' %>">
                     </div>
                     <div class="profile-item">
                         <label for="backlogs"><strong>No of Backlogs:</strong></label>
-                        <input type="text" id="backlogs" name="backlogs" value="{{ profile.backlogs }}">
+                        <input type="text" id="backlogs" name="backlog" value="<%= (profile.backlog) ? profile.backlog : 'xxxxxx' %>">
                     </div>
                     <div class="profile-item">
                         <label for="resumeLink"><strong>Resume Link:</strong></label>
-                        <input type="text" id="resumeLink" name="resumeLink" value="{{ profile.resumeLink }}">
+                        <input type="text" id="resumeLink" name="resume" value="<%= (profile.resume) ? profile.resume : 'xxxxxx' %>">
                     </div>
                 </div>
 
@@ -171,7 +171,7 @@
                 </div>
 
                 <div class="update-button-container">
-                    <button type="button" class="btn" onclick="updateProfile()">Update</button>
+                    <button type="submit" class="btn">Update</button>
                 </div>
             </form>
         </section>

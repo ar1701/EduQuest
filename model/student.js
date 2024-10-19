@@ -9,10 +9,10 @@ const studentProfileSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
-  year: String,
-  semester: String,
   course: String,
+  year: String,  
   cgpa: Number,
+  backlog: Number,
   resume: String,
 });
 const studentProfile = new mongoose.model("StudentProfile", studentProfileSchema);
