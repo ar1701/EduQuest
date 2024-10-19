@@ -1,1 +1,0 @@
-# EduQuest - Explore, Learn & Achieve
