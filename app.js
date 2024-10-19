@@ -1,3 +1,4 @@
+let quiz;
 if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
 }
@@ -11,7 +12,7 @@ const path = require("path");
 const axios = require("axios");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const User = require("./model/user.js");
+const User = require("./model/clogin.js");
 const CompanyProfile = require("./model/companyProfile.js");
 // const Profile = require("./model/profile.js");
 
@@ -118,84 +119,84 @@ app.listen(port, () => {
   console.log("listening to the port: https://localhost:" + port);
 });
 
-app.get("/login", (req, res) => {
-  res.render("login.ejs");
-});
+// app.get("/login", (req, res) => {
+//   res.render("login.ejs");
+// });
 
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    failureRedirect: "/login",
-    failureFlash: true,
-  }),
-  async (req, res) => {
-    let { username, designation } = req.body;
-    req.session.user = { username };
-    req.flash("success", "Welcome to Placement Management System!");
-    if (designation == "Student") {
-      res.render("student.ejs");
-    } else {
-      res.render("faculty.ejs");
-    }
-  }
-);
+// app.post(
+//   "/login",
+//   passport.authenticate("local", {
+//     failureRedirect: "/login",
+//     failureFlash: true,
+//   }),
+//   async (req, res) => {
+//     let { username, designation } = req.body;
+//     req.session.user = { username };
+//     req.flash("success", "Welcome to Placement Management System!");
+//     if (designation == "Student") {
+//       res.render("student.ejs");
+//     } else {
+//       res.render("faculty.ejs");
+//     }
+//   }
+// );
 
-app.get("/signup", (req, res) => {
-  res.render("signup.ejs");
-});
+// app.get("/signup", (req, res) => {
+//   res.render("signup.ejs");
+// });
 
-app.post("/signup", async (req, res) => {
-  try {
-    let { username, name, email, phone, designation, department, password } =
-      req.body;
-    req.session.user = { username, email, name, phone };
-    const newUser = new User({
-      username,
-      name,
-      email,
-      phone,
-      designation,
-      department,
-    });
+// app.post("/signup", async (req, res) => {
+//   try {
+//     let { username, name, email, phone, designation, department, password } =
+//       req.body;
+//     req.session.user = { username, email, name, phone };
+//     const newUser = new User({
+//       username,
+//       name,
+//       email,
+//       phone,
+//       designation,
+//       department,
+//     });
 
-    await User.register(newUser, password);
+//     await User.register(newUser, password);
 
-    await newUser.save();
-    if (newUser.designation == "Student") {
-      res.render("student.ejs");
-    } else {
-      res.render("faculty.ejs");
-    }
-  } catch (e) {
-    res.redirect("/signup");
-  }
-});
+//     await newUser.save();
+//     if (newUser.designation == "Student") {
+//       res.render("student.ejs");
+//     } else {
+//       res.render("faculty.ejs");
+//     }
+//   } catch (e) {
+//     res.redirect("/signup");
+//   }
+// });
 
-app.get("/logout", function (req, res) {
-  req.logout(function (err) {
-    if (err) {
-      console.error("Error logging out:", err);
-      return next(err);
-    }
+// app.get("/logout", function (req, res) {
+//   req.logout(function (err) {
+//     if (err) {
+//       console.error("Error logging out:", err);
+//       return next(err);
+//     }
 
-    res.redirect("/main");
-  });
-});
+//     res.redirect("/main");
+//   });
+// });
 
-app.all("*", (req, res, next) => {
-  res.redirect("/index");
-});
+// app.all("*", (req, res, next) => {
+//   res.redirect("/index");
+// });
 
-app.get("/add-company", isLoggedIn, (req, res) => {
-  res.render("add-company.ejs");
-});
+// app.get("/add-company", isLoggedIn, (req, res) => {
+//   res.render("add-company.ejs");
+// });
 
-app.post("/add-company", isLoggedIn, async (req, res) => {
-  let { name, base, cgpa, role } = req.body;
-  let newCompany = new CompanyProfile({ name, base, cgpa, role });
-  await newCompany.save();
-  res.redirect("/main");
-});
+// app.post("/add-company", isLoggedIn, async (req, res) => {
+//   let { name, base, cgpa, role } = req.body;
+//   let newCompany = new CompanyProfile({ name, base, cgpa, role });
+//   await newCompany.save();
+//   res.redirect("/main");
+// });
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const fs = require("fs");
@@ -203,50 +204,68 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 async function quizGenerator(topic) {
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-  const prompt = `Based on the topic of ${topic}, create a multiple-choice quiz with 15 questions. Please format the response in JSON with the following structure:
+  const prompt = `Based on the topic of ${topic} in the context of Computer Science, create a multiple-choice quiz with 5 questions. Please format the response in JSON with the following structure:
 {
-  'title': 'MCQ Quiz on ${topic}',
-  'questions': [
+  "title": "MCQ Quiz on ${topic}",
+  "questions": [
     {
-      'question': 'Question text here',
-      'options': ['Option A', 'Option B', 'Option C', 'Option D'],
-      'correctAnswer': 'Correct answer text here'
+      "question": "Question text here",
+      "options": ["Option A", "Option B", "Option C", "Option D"],
+      "correctAnswer": "Correct answer text here"
     },
     {
-      'question': 'Next question text here',
-      'options': ['Option A', 'Option B', 'Option C', 'Option D'],
-      'correctAnswer': 'Correct answer text here'
-    },
-    // Repeat for all 15 questions
+      "question": "Next question text here",
+      "options": ["Option A", "Option B", "Option C", "Option D"],
+      "correctAnswer": "Correct answer text here"
+    }
+    // Repeat for all 5 questions
   ]
 }
 Make sure that:
+- Strictly Do not include any preamble.
 - Each question has 4 answer options.
-- Provide the correct answer for each question under 'correctAnswer'.
+- Provide the correct answer for each question under "correctAnswer".
 `;
   const result = await model.generateContent(prompt);
   const response = await result.response;
   const text = response.text();
+  console.log("Generated Quiz Response:", text); // Log the raw response text
+
   return text;
 }
 
-const quiz = quizGenerator("linkedList")
-  .then((ans) => {
-    return ans;
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+
 
 app.get("/practice", (req, res) => {
-  res.render("practice.ejs", { quiz });
+  res.render("practice.ejs");
+
+})
+
+
+app.post("/practice", async (req, res) => {
+  try {
+    const { topic } = req.body;
+    const generatedQuiz = await quizGenerator(topic);
+   // Log the raw generated quiz
+
+    // Attempt to parse the generated quiz string into an object
+    const quiz = JSON.parse(generatedQuiz);
+    
+    res.render("quiz.ejs", { quiz }); // Render the quiz page with the generated quiz
+  } catch (err) {
+    console.error("Error generating quiz:", err);
+    res.status(500).send("Error generating quiz. Please try again.");
+  }
 });
 
-app.post("/practice", (req, res) => {
+
+app.post("/quiz", (req, res) => {
+  if (!quiz) {
+    return res.status(400).json({ error: "Quiz not found." }); 
+  }
+
   const userAnswers = req.body.userAnswers;
   let correctCount = 0;
-
-  // Compare user answers with correct answers
   quiz.questions.forEach((question, index) => {
     const correctAnswer = question.correctAnswer;
     const userAnswer = userAnswers[`q${index}`];
@@ -255,6 +274,6 @@ app.post("/practice", (req, res) => {
       correctCount++;
     }
   });
-zzz
+
   res.json({ correctCount });
 });
