@@ -50,7 +50,7 @@ We plan to introduce an AI-powered mock interview feature that simulates real in
 In the future, we will implement a blockchain-based system for the secure and verifiable storage of student credentials and certificates. This will streamline the verification process for recruiters and ensure the authenticity of academic records.
 
 
-*Technologies & Tools Used -*
+**Technologies & Tools Used -**
 - *Frontend: HTML, CSS, JavaScript*
 - *Backend: NodeJS, ExpressJS, MongoDB Atlas*
 - *Framework: BootStrap, ejs*
