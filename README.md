@@ -61,4 +61,4 @@ In the future, we will implement a blockchain-based system for the secure and ve
 
 **Franchise Potential -**
 While CusaQuest is being developed as a complete solution to improve placement processes within educational institutions, we envision it as a scalable business model. With its unique and advanced features, CusaQuest has the potential to be sold as a franchise to other colleges and universities, empowering them to enhance their own placement systems. This franchise model would enable institutions to leverage CusaQuest's cutting-edge tools, including AI-based interview panels, automated shortlisting, and personalized career recommendations, ensuring a modern and efficient placement process for all.
-**CusaQuest is not only as a comprehensive solution but also as a future-ready business opportunity, scalable to other educational institutions through a franchise model.** 
+**CusaQuest is not only a comprehensive solution but also a future-ready business opportunity, scalable to other educational institutions through a franchise model.** 
