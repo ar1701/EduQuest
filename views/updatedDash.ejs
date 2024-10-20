@@ -242,34 +242,28 @@
         </div>
 
 
-     <section class="dashboard-section">
+        <section class="dashboard-section">
             <h2 class="section-title">Job and Internship Listings</h2>
             <input type="text" class="search-bar" placeholder="Search for jobs...">
-            <div class="job-listing">
-                <div>
-                    <h3>Software Engineer : Company Name</h3>
-                    <p>ABC Corp</p>
-                    <!--if job.cgpa > user.cgpa ? <p> U are not eligible : <p> eligible-->
+            
+            <% company.forEach(function(comp) { %>
+                <div class="job-listing">
+                    <div>
+                        <h3>Software Engineer : <%= comp.role %></h3>
+                        <p>Company: <%= comp.name %></p>
+                        <p>Required CGPA: <%= comp.cgpa %></p>
+                    </div>
+                    <div>
+                        <% if (profile.cgpa >= comp.cgpa) { %>
+                            <button class="btn">Apply</button>
+                        <% } else { %>
+                            <p>You are <b>Not Eligible </b></p>
+                        <% } %>
+                    </div>
                 </div>
-                <div>
-                    <!--if job.cgpa > user.cgpa ? <p> <button class="btn">Apply</button>: nothing-->
-                    
-                    
-                </div>
-            </div>
-            <div class="job-listing">
-                <div>
-                    <h3>Software Engineer : Company Name</h3>
-                    <p>ABC Corp</p>
-                    <!--if job.cgpa > user.cgpa ? <p> U are not eligible : <p> eligible-->
-                </div>
-                <div>
-                    <!--if job.cgpa > user.cgpa ? <p> <button class="btn">Apply</button>: nothing-->
-                    
-                    
-                </div>
-            </div>
+            <% }); %>
         </section>
+        
 
        <div class="dashboar-container">
         <section class="dashboard-section">
