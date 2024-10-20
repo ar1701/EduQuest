@@ -55,8 +55,8 @@ In the future, we will implement a blockchain-based system for the secure and ve
 - *Backend: NodeJS, ExpressJS, MongoDB Atlas*
 - *Framework: BootStrap, ejs*
 - *Deployment: Render, Netlify*
-- *Google Tools: Vertex AI, Gemini(API)*
-- *Other Tools: Libraries, Excel*
+- *Google Tools: Gemini(API), VS Code*
+- *Other Tools: Libraries, Ms Excel*
 
 
 **Franchise Potential -**
