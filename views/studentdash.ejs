@@ -34,6 +34,17 @@
             font-weight: 700;
             text-decoration: none;
         }
+        .dashboard-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .dashboar-container {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+        }
         .navbar-links a {
             color: var(--dark);
             text-decoration: none;
@@ -196,7 +207,7 @@
                 </div>
             </form>
         </section>
-
+<div class="dashboard-container">
      <section class="dashboard-section">
             <h2 class="section-title">Upcoming Events</h2>
             
@@ -214,6 +225,25 @@
                 <button class="btn btn-secondary" data-toggle="modal" data-target="#detailsModal" data-event="Workshop: Interview Skills" data-details="Enhance your interview skills with our workshop that covers techniques and tips for success.">View Details</button>
             </div>
         </section>
+
+  <section class="dashboard-section">
+            <h2 class="section-title">My Applications</h2>
+            <div class="application-item">
+                <h3>Software Developer Intern - Tech Innovators Inc.</h3>
+                <p>Status: Application Under Review</p>
+            </div>
+            <div class="application-item">
+                <h3>Data Analyst - DataCrunch Solutions</h3>
+                <p>Status: Interview Scheduled</p>
+            </div>
+        </section>
+ <section class="dashboard-section">
+            <h2 class="section-title">Notifications and Alerts</h2>
+            <div class="notification-item">Application Status Updated</div>
+            <div class="notification-item">New Job Posting Alert</div>
+        </section>
+</div>
+
 
         <section class="dashboard-section">
             <h2 class="section-title">Job and Internship Listings</h2>
@@ -240,22 +270,12 @@
             </div>
         </section>
 
-        <section class="dashboard-section">
-            <h2 class="section-title">My Applications</h2>
-            <div class="application-item">
-                <h3>Software Developer Intern - Tech Innovators Inc.</h3>
-                <p>Status: Application Under Review</p>
-            </div>
-            <div class="application-item">
-                <h3>Data Analyst - DataCrunch Solutions</h3>
-                <p>Status: Interview Scheduled</p>
-            </div>
-        </section>
-
+      
+        <div class="dashboar-container">
         <section class="dashboard-section">
             <h2 class="section-title">Interview Preparation</h2>
             <div class="interview-item">
-                <p>Company: DataCrunch Solutions</p>
+                <p>Make yourself ready for the Interview.</p>
                 <button class="btn">Prepare</button>
             </div>
         </section>
@@ -269,31 +289,25 @@
                 
             </div>
         </section>
+</div
 
         <section class="dashboard-section">
             <h2 class="section-title">Resume</h2>
-            <div class="resource-item">
-                <h3>Resume Template</h3>
-                <button class="btn">Download</button>
-            </div>
+           
             <div class="resource-item">
                 <h3>ATS Score</h3>
                 <a href="https://ats-1-8ksl.vercel.app/" class="btn">Calculate ATS</a>
                 
             </div>
         </section>
-
+<div class="dashboard-container">
         <section class="dashboard-section">
             <h2 class="section-title">Feedback and Reviews</h2>
             <button class="btn">View Company Feedback</button>
             <button class="btn">View Peer Reviews</button>
         </section>
 
-        <section class="dashboard-section">
-            <h2 class="section-title">Notifications and Alerts</h2>
-            <div class="notification-item">Application Status Updated</div>
-            <div class="notification-item">New Job Posting Alert</div>
-        </section>
+       
 
         <section class="dashboard-section">
             <h2 class="section-title">Support and FAQs</h2>
@@ -307,6 +321,7 @@
             <button class="btn">View Mentorship Opportunities</button>
         </section>
     </div>
+</div>
    
     
 
