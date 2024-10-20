@@ -140,7 +140,7 @@ app.post(
     if (user.designation == "student") {
       res.render("updatedDash.ejs", { user, user1, profile });
     } else {
-      res.render("faculty.ejs");
+      res.render("coordinator.ejs");
     }
   }
 );
@@ -219,20 +219,28 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// app.get("/logout", function (req, res) {
-//   req.logout(function (err) {
-//     if (err) {
-//       console.error("Error logging out:", err);
-//       return next(err);
-//     }
+app.get("/all", (req, res) => {
+  res.render("all.ejs");
+})
 
-//     res.redirect("/main");
-//   });
-// });
+app.get("/department/:dept", (req, res) => {
+  res.render("department.ejs");
+})
 
-// app.all("*", (req, res, next) => {
-//   res.redirect("/index");
-// });
+app.get("/logout", function (req, res) {
+  req.logout(function (err) {
+    if (err) {
+      console.error("Error logging out:", err);
+      return next(err);
+    }
+
+    res.redirect("/login");
+  });
+});
+
+app.all("*", (req, res, next) => {
+  res.redirect("/login");
+});
 
 // app.get("/add-company", isLoggedIn, (req, res) => {
 //   res.render("add-company.ejs");
