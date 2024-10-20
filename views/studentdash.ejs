@@ -245,30 +245,27 @@
 </div>
 
 
-        <section class="dashboard-section">
-            <h2 class="section-title">Job and Internship Listings</h2>
-            <input type="text" class="search-bar" placeholder="Search for jobs...">
-            <div class="job-listing">
-                <div>
-                    <h3>Software Engineer</h3>
-                    <p>ABC Corp</p>
-                </div>
-                <div>
-                    <button class="btn">Apply</button>
-                    <button class="btn">Save</button>
-                </div>
+<section class="dashboard-section">
+    <h2 class="section-title">Job and Internship Listings</h2>
+    <input type="text" class="search-bar" placeholder="Search for jobs...">
+    
+    <% company.forEach(function(comp) { %>
+        <div class="job-listing">
+            <div>
+                <h3>Software Engineer : <%= comp.role %></h3>
+                <p>Company: <%= comp.name %></p>
+                <p>Required CGPA: <%= comp.cgpa %></p>
             </div>
-            <div class="job-listing">
-                <div>
-                    <h3>Marketing Intern</h3>
-                    <p>XYZ Ltd</p>
-                </div>
-                <div>
+            <div>
+                <% if (profile.cgpa >= comp.cgpa) { %>
                     <button class="btn">Apply</button>
-                    <button class="btn">Save</button>
-                </div>
+                <% } else { %>
+                    <p>You are <b>Not Eligible </b></p>
+                <% } %>
             </div>
-        </section>
+        </div>
+    <% }); %>
+</section>
 
       
         <div class="dashboar-container">

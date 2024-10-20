@@ -170,10 +170,11 @@ app.post(
         profile = new StudentProfile({ owner: user._id });
         await profile.save();
       }
-
+      const company = await CompanyProfile.find();
+    
       req.flash("success", "Welcome to Placement Management System!");
       if (user.designation == "student") {
-        res.render("updatedDash.ejs", { user, profile });
+        res.render("updatedDash.ejs", { user, profile, company });
       } else {
         res.render("coordinator.ejs");
       }
@@ -205,8 +206,8 @@ app.post("/studentdash", async (req, res) => {
       { course, year, cgpa, backlog, resume },
       { new: true, upsert: true } // This will create a new document if it doesn't exist
     );
-
-    res.render("updatedDash.ejs", { user, profile });
+    const company = await CompanyProfile.find();
+    res.render("updatedDash.ejs", { user, profile , company});
   } catch (error) {
     console.error("Error in /studentdash route:", error);
     req.flash("error", "An error occurred. Please try again.");
@@ -235,7 +236,9 @@ app.put("/updatedDash", async (req, res) => {
       { new: true, upsert: true } // This will create a new document if it doesn't exist
     );
 
-    res.render("updatedDash.ejs", { user, profile });
+    const company = await CompanyProfile.find();
+
+    res.render("updatedDash.ejs", { user, profile, company });
   } catch (error) {
     console.error("Error in /updatedDash PUT route:", error);
     req.flash("error", "An error occurred. Please try again.");
@@ -275,9 +278,14 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.get("/coordinator", async (req, res) => { 
+  res.render("coordinator.ejs");
+});
+
 app.post("/coordinator", async (req, res) => {
   let { name, base, cgpa, role } = req.body;
   let newCompany = new CompanyProfile({ name, base, cgpa, role });
+  req.session.cname = name;
   await newCompany.save();
   res.redirect("/coordinator");
 });
