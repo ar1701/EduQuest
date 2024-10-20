@@ -143,12 +143,12 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="#" class="navbar-brand">CusaQuest</a>
+        <a href="/updatedDash" class="navbar-brand">CusaQuest</a>
         <div class="navbar-links">
-            <a href="#">Home</a>
-            <a href="#">Assessment</a>
-            <a href="#">Resume ATS Calculation</a>
-            <a href="#">AI Support</a>
+            <a href="/updatedDash">Home</a>
+            <a href="/practice">Practice</a>
+            <a href="https://ats-1-8ksl.vercel.app/">Resume ATS Checker</a>
+            <a href="/logout">Log Out</a>
             
         </div>
     </nav>
@@ -160,7 +160,7 @@
                 <div class="profile-summary">
                     <div class="profile-item">
                         <label for="name"><strong>Name:</strong></label>
-                        <input type="text" id="name" name="name" value=" <%= (user.name) ? user.name : user1.name %> ">
+                        <input type="text" id="name" name="name" value=" <%= name %> ">
                     </div>
                     <div class="profile-item">
                         <label for="course"><strong>Course:</strong></label>

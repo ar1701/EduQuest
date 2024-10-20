@@ -124,6 +124,13 @@ app.get("/login", (req, res) => {
   res.render("login.ejs");
 });
 
+
+app.get("/updatedDash", isLoggedIn, async (req, res) => {
+  let user = await User.findOne({ username: req.session.user.username });
+  let profile = await StudentProfile.findOne({ owner: user._id });
+  res.render("updatedDash.ejs", { user, profile });
+});
+
 app.post(
   "/login",
   passport.authenticate("local", {
@@ -193,8 +200,7 @@ app.get("/register", (req, res) => {
 
 app.post("/register", async (req, res) => {
   try {
-    let { username, name, email, phone, designation, department, password } =
-      req.body;
+    let { username, name, email, phone, designation, department, password } = req.body;
     req.session.user = { username, email, name, designation };
     const newUser = new User({
       username,
@@ -208,11 +214,10 @@ app.post("/register", async (req, res) => {
     await User.register(newUser, password);
 
     await newUser.save();
-    if (newUser.designation == "Student") {
-      res.render("studentdash.ejs");
+    if (designation == "student") {
+      res.render("studentdash.ejs", {name});
     } else {
-      // res.render("faculty.ejs");
-      res.redirect("/login");
+      res.render("coordinator.ejs");
     }
   } catch (e) {
     res.redirect("/login");
@@ -233,9 +238,7 @@ app.get("/logout", function (req, res) {
   });
 });
 
-app.all("*", (req, res, next) => {
-  res.redirect("/login");
-});
+
 
 // app.get("/add-company", isLoggedIn, (req, res) => {
 //   res.render("add-company.ejs");
@@ -336,4 +339,9 @@ app.post("/submit-quiz", (req, res) => {
     totalQuestions: quiz.questions.length,
     results,
   });
+});
+
+
+app.all("*", (req, res, next) => {
+  res.redirect("/login");
 });
