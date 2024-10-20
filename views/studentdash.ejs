@@ -198,9 +198,9 @@
                     </div>
                 </div>
 
-                <div class="profile-items">
+                <!-- <div class="profile-items">
                     <strong>Profile Completion:</strong> <span id="profile-completion">{{ profile.profileCompletion }}%</span>
-                </div>
+                </div> -->
 
                 <div class="update-button-container">
                     <button type="submit" class="btn">Update</button>
@@ -248,24 +248,8 @@
 <section class="dashboard-section">
     <h2 class="section-title">Job and Internship Listings</h2>
     <input type="text" class="search-bar" placeholder="Search for jobs...">
-    
-    <% company.forEach(function(comp) { %>
-        <div class="job-listing">
-            <div>
-                <h3>Software Engineer : <%= comp.role %></h3>
-                <p>Company: <%= comp.name %></p>
-                <p>Required CGPA: <%= comp.cgpa %></p>
-            </div>
-            <div>
-                <% if (profile.cgpa >= comp.cgpa) { %>
-                    <button class="btn">Apply</button>
-                <% } else { %>
-                    <p>You are <b>Not Eligible </b></p>
-                <% } %>
-            </div>
-        </div>
-    <% }); %>
-</section>
+ 
+   </section>
 
       
         <div class="dashboar-container">
