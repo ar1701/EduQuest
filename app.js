@@ -219,13 +219,8 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.get("/all", (req, res) => {
-  res.render("all.ejs");
-})
 
-app.get("/department/:dept", (req, res) => {
-  res.render("department.ejs");
-})
+
 
 app.get("/logout", function (req, res) {
   req.logout(function (err) {
