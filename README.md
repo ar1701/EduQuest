@@ -35,7 +35,7 @@ Allows for the creation of tailored test assessments that meet the specific need
 Continuous Improvement through Feedback: We believe in evolving with your needs. Share your feedback through a user-friendly system, allowing us to constantly improve the platform's experience and deliver the best possible service. Built-in feedback loop for students and recruiters post-interviews or assessments. Helps refine the placement process through continuous feedback, ensuring better preparation and performance improvements.
 
 
-**What's next for CusaQuest -**
+*What's next for CusaQuest -*
 
 ***AI-Based Interview Panel Selection***
 To ensure fairness and eliminate human bias, we will implement an AI-driven system for selecting interview panelists.This system will analyze the qualifications and experience of panelists, ensuring diverse and balanced panels for every interview round, promoting objectivity and fair assessment.
@@ -49,4 +49,12 @@ We plan to introduce an AI-powered mock interview feature that simulates real in
 ***Blockchain-Based Certificate Verification***
 In the future, we will implement a blockchain-based system for the secure and verifiable storage of student credentials and certificates. This will streamline the verification process for recruiters and ensure the authenticity of academic records.
 
+
+*Technologies & Tools Used -*
+- *Frontend: HTML, CSS, JavaScript*
+- *Backend: NodeJS, ExpressJS, MongoDB Atlas*
+- *Framework: BootStrap, ejs*
+- *Deployment: Render, Netlify*
+- *Google Tools: Vertex AI, Gemini(API)*
+- *Other Tools: Libraries, Excel*
 
