@@ -275,6 +275,13 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.post("/coordinator", async (req, res) => {
+  let { name, base, cgpa, role } = req.body;
+  let newCompany = new CompanyProfile({ name, base, cgpa, role });
+  await newCompany.save();
+  res.redirect("/coordinator");
+});
+
 
 
 
@@ -359,9 +366,7 @@ app.post("/practice", async (req, res) => {
 });
 
 app.post("/submit-quiz", (req, res) => {
-  // console.log("Received quiz submission");
-  // console.log("Request body:", req.body);
-  // console.log("Session:", req.session);
+
 
   const userAnswers = req.body.userAnswers;
   const quiz = req.session.quiz;

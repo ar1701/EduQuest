@@ -7,110 +7,101 @@
     <link rel="stylesheet" href="/css/coordinator.css">
 </head>
 <body>
-   <div class="content-wrapper">
-    <section class = "dashboard-section">
-        <nav class="navbar">
-            <a href="#" class="navbar-brand">CusaQuest</a>
-            <div class="navbar-links">
-                <a href="#">Company Listings</a>
-                <a href="/index">Statistics</a>
-                <a href="#">Excel</a>
-                <a href="/logout">Logout</a>
-                
-            </div>
-        </nav>
-    </section>
-    <h1>COORDINATOR DASHBOARD</h1>
-    
-  
-    <section class = "dashboard-section">
-        <div class="company">
-            <div class="card">
-                <div class="image-container">
-                    <img src="/media/cisco.png" alt="Company Image" class="company-image" />
-                </div>
-                <div class="button-container">
-                    <div class="btn view-btn">View</div>
-                    <div class="btn delete-btn">Delete</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image-container">
-                    <img src="/media/ibm.jpg" alt="Company Image" class="company-image" />
-                </div>
-                <div class="button-container">
-                    <div class="btn view-btn">View</div>
-                    <div class="btn delete-btn">Delete</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image-container">
-                    <img src="/media/ey.png" alt="Company Image" class="company-image" />
-                </div>
-                <div class="button-container">
-                    <div class="btn view-btn">View</div>
-                    <div class="btn delete-btn">Delete</div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="image-container">
-                    <img src="/media/soti.jpg" alt="Company Image" class="company-image" />
-                </div>
-                <div class="button-container">
-                    <div class="btn view-btn">View</div>
-                    <div class="btn delete-btn">Delete</div>
-                </div>
-            </div>
-    
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">CusaQuest</a>
+        <div class="navbar-links">
+            <a href="#">Company Listings</a>
+            <a href="#">Statistics</a>
+            <a href="#">Excel</a>
+            <a href="#">Logout</a>
         </div>
-    </section>
+    </nav>
+    
+    <div class="content-wrapper">
+        <h1>COORDINATOR DASHBOARD</h1>
+
+        <section class="dashboard-section">
+            <div class="company">
+                <div class="card" data-company="Cisco" data-package="15 LPA" data-role="Software Engineer" data-interview="2024-11-15">
+                    <div class="image-container">
+                        <img src="/media/cisco.png" alt="Cisco" class="company-imageC" />
+                    </div>
+                    <div class="button-container">
+                        <div class="btn view-btn">View</div>
+                    </div>
+                </div>
+                <div class="card" data-company="IBM" data-package="12 LPA" data-role="Data Analyst" data-interview="2024-12-01">
+                    <div class="image-container">
+                        <img src="/media/ibm.jpg" alt="IBM" class="company-image" />
+                    </div>
+                    <div class="button-container">
+                        <div class="btn view-btn">View</div>
+                    </div>
+                </div>
+                <div class="card" data-company="EY" data-package="14 LPA" data-role="Consultant" data-interview="2024-11-20">
+                    <div class="image-container">
+                        <img src="/media/ey.png" alt="EY" class="company-image" />
+                    </div>
+                    <div class="button-container">
+                        <div class="btn view-btn">View</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <section class = "dashboard-section">
         <div class="form-container">
-            <form id="jobForm">
+            <form id="jobForm" action="/coordinator" method="post">
                 <h2>Add a Company</h2>
                 <label for="company">Company Name:</label>
-                <input type="text" id="company" required>
+                <input type="text" name="name" id="company" required>
                 <label for="package">Package Offered:</label>
-                <input type="text" id="package" required>
+                <input type="text" name="base" id="package" required>
+                <label for="role">CGPA:</label>
+                <input type="number" name="cgpa" id="role" required>
                 <label for="role">Job Role:</label>
-                <input type="text" id="role" required>
+                <input type="text" name="role" id="package" required>
+               
+                <button class="btn">Submit</button>
+                
                 
             </form>
         </div>
     </section>
 
-    <section class = "dashboard-section">
-        <div class="modal" id="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <img id="modalImage" class="modal-image" src="" alt="Modal Image">
-                <div class="modal-actions">
-                    <button onclick="viewDetails()">View</button>
-                    <button onclick="deleteJob()">Delete</button>
-                </div>
-                <div class="job-details" id="jobDetails">
-                    <p id="jobRole"></p>
-                    <p id="packageOffered"></p>
-                    <p id="interviewDate"></p>
-                </div>
-            </div>
+    <section class="dashboard-section">
+        <h2 class="section-title">Automate Excel Sheet</h2>
+        <div class="interview-item">
+            <p>Make yourself ready for the Interview.</p>
+            <a href = "https://soft-pothos-ac2e9a.netlify.app/" class = "btn">Automate Excel</a>
+
         </div>
     </section>
 
-    <section class = "dashboard-section">
-        <div class="card">
-            <img src="/media/image4.jpg" alt="Card Image"> <!-- Add your card image path here -->
-            <button onclick="window.location.href='/all'">View Placement Statistics</button>
-        </div>
-    
-       </div>
-    </section>
-    <section class = "dashboard-section">
-        <div class="AutomateExcel">
-            <a href = "https://admirable-toffee-1f719d.netlify.app/" class = "btn">Automate Excel</a>
+    <section class="dashboard-section">
+        <h2 class="section-title">View Placement Statistics</h2>
+        <div class="interview-item">
+            <p>Create your own Customize Quizes </p>
+            
+            <a href="https://darling-gumption-82cda2.netlify.app/" class="btn">View Placement Statistics</a>
+            
         </div>
     </section>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" class="modal-image" src="" alt="Modal Image">
+            <div class="job-details">
+                <p id="jobRole"></p>
+                <p id="packageOffered"></p>
+                <p id="interviewDate"></p>
+            </div>
+        </div>
+    </div>
+
     <script src="/js/coordinator.js"></script>
 </body>
 </html>
