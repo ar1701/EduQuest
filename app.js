@@ -15,7 +15,7 @@ const ejsMate = require("ejs-mate");
 const User = require("./model/clogin.js");
 const CompanyProfile = require("./model/companyProfile.js");
 const StudentProfile = require("./model/student.js");
-// const Profile = require("./model/profile.js");
+
 
 const session = require("express-session");
 const bodyParser = require("body-parser");
@@ -43,16 +43,6 @@ async function extractImage(url) {
   }
 }
 
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//       cb(null, 'uploads/');
-//   },
-//   filename: function (req, file, cb) {
-//       cb(null, file.originalname);
-//   }
-// });
-
-// const upload = multer({ storage });
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
@@ -139,8 +129,8 @@ app.get("/updatedDash", isLoggedIn, async (req, res) => {
       profile = new StudentProfile({ owner: user._id });
       await profile.save();
     }
-
-    res.render("updatedDash.ejs", { user, profile });
+    const company = await CompanyProfile.find();
+    res.render("updatedDash.ejs", { user, profile, company });
   } catch (error) {
     console.error("Error in /updatedDash route:", error);
     req.flash("error", "An error occurred. Please try again.");
@@ -266,10 +256,11 @@ app.post("/register", async (req, res) => {
     });
 
     await User.register(newUser, password);
+    const company = await CompanyProfile.find();
 
     await newUser.save();
     if (designation == "student") {
-      res.render("studentdash.ejs", {name});
+      res.render("studentdash.ejs", {name,company});
     } else {
       res.render("coordinator.ejs");
     }
@@ -306,16 +297,6 @@ app.get("/logout", function (req, res) {
 
 
 
-// app.get("/add-company", isLoggedIn, (req, res) => {
-//   res.render("add-company.ejs");
-// });
-
-// app.post("/add-company", isLoggedIn, async (req, res) => {
-//   let { name, base, cgpa, role } = req.body;
-//   let newCompany = new CompanyProfile({ name, base, cgpa, role });
-//   await newCompany.save();
-//   res.redirect("/main");
-// });
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const fs = require("fs");
@@ -323,7 +304,7 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 async function quizGenerator(topic) {
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-  const prompt = `Based on the topic of ${topic} in the context of Engineering, create a multiple-choice quiz with 5 questions. Please format the response in JSON with the following structure:
+  const prompt = `Based on the topic of ${topic} in the context of Engineering, create a multiple-choice quiz with 10 questions. Please format the response only in JSON (no extra things) with the following structure:
 {
   "title": "MCQ Quiz on ${topic}",
   "questions": [
@@ -337,7 +318,7 @@ async function quizGenerator(topic) {
       "options": ["Option A", "Option B", "Option C", "Option D"],
       "correctAnswer": "Correct answer text here"
     }
-    // Repeat for all 5 questions
+    // Repeat for all 10 questions
   ]
 }
 Make sure that:
