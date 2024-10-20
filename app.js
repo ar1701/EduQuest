@@ -132,13 +132,13 @@ app.post(
   }),
   async (req, res) => {
     let { username } = req.body;
-    let profile = req.body;
     req.session.user = { username };
-    console.log(req.session.user);
-    let user = await User.findOne({username: username});
+    let user = await User.findOne({ username: username });
+    let user1 = user;
+    let profile = await StudentProfile.findOne({ owner: user._id });
     req.flash("success", "Welcome to Placement Management System!");
     if (user.designation == "student") {
-      res.render("studentdash.ejs", {user, profile});
+      res.render("updatedDash.ejs", { user, user1, profile });
     } else {
       res.render("faculty.ejs");
     }
@@ -146,25 +146,46 @@ app.post(
 );
 
 app.post("/studentdash", async (req, res) => {
-  let {name, course, year, cgpa, backlog, resume} = req.body;
-  let profile = req.body;
-  let user = await User.findOne({username: req.session.user.username});
-  const user1 = await User.findOneAndUpdate(
+  let { name, course, year, cgpa, backlog, resume } = req.body;
+  let user = await User.findOne({ username: req.session.user.username });
+
+  user = await User.findOneAndUpdate(
     { username: req.session.user.username },
     { name: name },
     { new: true }
   );
-  let student = new StudentProfile({
-    user: user._id,
-    course: course,
-    year: year,
-    cgpa: cgpa,
-    backlog: backlog,
-    resume: resume
-  });
-  await student.save();
-  res.render("studentdash.ejs", {user1, profile});
-})
+  let profile = await StudentProfile.findOneAndUpdate({
+    owner: user._id,
+    course,
+    year,
+    cgpa,
+    backlog,
+    resume,
+  })
+  res.render("updatedDash.ejs", { user, profile });
+});
+
+app.put("/updatedDash", async (req, res) => {
+  let { name, course, year, cgpa, backlog, resume } = req.body;
+  let user = await User.findOne({ username: req.session.user.username });
+
+  user = await User.findOneAndUpdate(
+    { username: req.session.user.username },
+    { name: name },
+    { new: true }
+  );
+
+  // Make sure to fetch the updated profile after the update
+  let profile = await StudentProfile.findOneAndUpdate(
+    { owner: user._id },
+    { course, year, cgpa, backlog, resume },
+    { new: true }
+  );
+
+  res.render("updatedDash.ejs", { user, profile });
+});
+
+
 
 app.get("/register", (req, res) => {
   res.render("register.ejs");
@@ -259,31 +280,26 @@ Make sure that:
   return text;
 }
 
-
-
 app.get("/practice", (req, res) => {
   res.render("practice.ejs");
-
-})
-
+});
 
 app.post("/practice", async (req, res) => {
   try {
     const { topic } = req.body;
     const generatedQuiz = await quizGenerator(topic);
-   // Log the raw generated quiz
+    // Log the raw generated quiz
 
     // Attempt to parse the generated quiz string into an object
     const quiz = JSON.parse(generatedQuiz);
     req.session.quiz = quiz; // Store the generated quiz in the session
-    
+
     res.render("quiz.ejs", { quiz }); // Render the quiz page with the generated quiz
   } catch (err) {
     console.error("Error generating quiz:", err);
     res.status(500).send("Error generating quiz. Please try again.");
   }
 });
-
 
 app.post("/submit-quiz", (req, res) => {
   // console.log("Received quiz submission");
@@ -298,8 +314,6 @@ app.post("/submit-quiz", (req, res) => {
     return res.status(400).json({ error: "Quiz not found in session." });
   }
 
-
-
   let correctCount = 0;
   const results = quiz.questions.map((question, index) => {
     const correctAnswer = question.correctAnswer;
@@ -310,15 +324,13 @@ app.post("/submit-quiz", (req, res) => {
       question: question.question,
       userAnswer,
       correctAnswer,
-      isCorrect
+      isCorrect,
     };
   });
 
- 
-  res.json({ 
-    correctCount, 
+  res.json({
+    correctCount,
     totalQuestions: quiz.questions.length,
-    results
+    results,
   });
 });
-

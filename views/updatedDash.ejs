@@ -6,8 +6,7 @@
     <title>Student Dashboard - EduFlex</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     
-         
-     <style>
+    <style>
         :root {
             --primary: #ff8c6b;
             --light: #FFF5F2;
@@ -22,7 +21,7 @@
         }
         .navbar {
             background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -51,8 +50,8 @@
         }
         .dashboard-section {
             background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 1.5rem;
             margin-bottom: 2rem;
         }
@@ -89,7 +88,6 @@
         .modal-header, .modal-footer {
             border: none;
         }
-        /* Custom CSS to position the modal at the top */
         .modal-dialog {
             margin: 0;
             position: absolute;
@@ -102,7 +100,6 @@
             margin-bottom: 0.5rem;
             font-weight: 600;
             color: var(--dark);
-            
             margin-top: 1.5rem;
         }
         .profile-item input {
@@ -114,7 +111,6 @@
             color: var(--dark);
             background-color: var(--light);
             box-sizing: border-box;
-            
         }
         .update-button-container {
             display: flex;
@@ -149,41 +145,41 @@
             <a href="#">Assessment</a>
             <a href="#">Resume ATS Calculation</a>
             <a href="#">AI Support</a>
-            
         </div>
     </nav>
 
     <div class="content-wrapper">
         <section class="dashboard-section">
             <h2 class="section-title">Profile Summary</h2>
-            <form id="profile-form" action="/studentdash" method="post">
+            <form id="profile-form" action="/updatedDash?_method=PUT" method="post">
+                <input type="hidden" >
                 <div class="profile-summary">
                     <div class="profile-item">
                         <label for="name"><strong>Name:</strong></label>
-                        <input type="text" id="name" name="name" value=" <%= (user.name) ? user.name : user1.name %> ">
+                        <input type="text" id="name" name="name" value="<%= user.name %>">
                     </div>
                     <div class="profile-item">
                         <label for="course"><strong>Course:</strong></label>
-                        <input type="text" id="course" name="course" placeholder="xxxxxxxxxx">
+                        <input type="text" id="course" name="course" value="<%= profile.course %>">
                     </div>
                 </div>
 
                 <div class="profile-summary-row-2">
                     <div class="profile-item">
                         <label for="year"><strong>Year:</strong></label>
-                        <input type="text" id="year" name="year" placeholder="xxxxxxxxxx">
+                        <input type="text" id="year" name="year" value="<%= profile.year %>">
                     </div>
                     <div class="profile-item">
                         <label for="cgpa"><strong>CGPA:</strong></label>
-                        <input type="text" id="cgpa" name="cgpa" placeholder="xxxxxxxxxx">
+                        <input type="text" id="cgpa" name="cgpa" value="<%= profile.cgpa %>">
                     </div>
                     <div class="profile-item">
                         <label for="backlogs"><strong>No of Backlogs:</strong></label>
-                        <input type="text" id="backlogs" name="backlog" placeholder="xxxxxxxxxx">
+                        <input type="text" id="backlogs" name="backlog" value="<%= profile.backlog %>">
                     </div>
                     <div class="profile-item">
                         <label for="resumeLink"><strong>Resume Link:</strong></label>
-                        <input type="text" id="resumeLink" name="resume" placeholder="xxxxxxxxxx">
+                        <input type="text" id="resumeLink" name="resume" value="<%= profile.resume %>">
                     </div>
                 </div>
 
@@ -197,21 +193,19 @@
             </form>
         </section>
 
-     <section class="dashboard-section">
+        <section class="dashboard-section">
             <h2 class="section-title">Upcoming Events</h2>
-            
             <div class="event-item">
                 <h3>Job Fair</h3>
                 <p>Date: October 15, 2024</p>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#rsvpModal" data-event="Job Fair">RSVP</button>
-                <button class="btn btn-secondary" data-toggle="modal" data-target="#detailsModal" data-event="Job Fair" data-details="Join us for a job fair where you can meet potential employers and explore job opportunities.">View Details</button>
+                <button class="btn" data-toggle="modal" data-target="#rsvpModal" data-event="Job Fair">RSVP</button>
+                <button class="btn" data-toggle="modal" data-target="#detailsModal" data-event="Job Fair" data-details="Join us for a job fair where you can meet potential employers and explore job opportunities.">View Details</button>
             </div>
-        
             <div class="event-item">
                 <h3>Workshop: Interview Skills</h3>
                 <p>Date: October 20, 2024</p>
-                <button class="btn btn-primary" data-toggle="modal" data-target="#rsvpModal" data-event="Workshop: Interview Skills">RSVP</button>
-                <button class="btn btn-secondary" data-toggle="modal" data-target="#detailsModal" data-event="Workshop: Interview Skills" data-details="Enhance your interview skills with our workshop that covers techniques and tips for success.">View Details</button>
+                <button class="btn" data-toggle="modal" data-target="#rsvpModal" data-event="Workshop: Interview Skills">RSVP</button>
+                <button class="btn" data-toggle="modal" data-target="#detailsModal" data-event="Workshop: Interview Skills" data-details="Enhance your interview skills with our workshop that covers techniques and tips for success.">View Details</button>
             </div>
         </section>
 
@@ -243,71 +237,15 @@
         <section class="dashboard-section">
             <h2 class="section-title">My Applications</h2>
             <div class="application-item">
-                <h3>Software Developer Intern - Tech Innovators Inc.</h3>
-                <p>Status: Application Under Review</p>
-            </div>
-            <div class="application-item">
-                <h3>Data Analyst - DataCrunch Solutions</h3>
+                <h3>Applied for Software Engineer at ABC Corp</h3>
                 <p>Status: Interview Scheduled</p>
             </div>
-        </section>
-
-        <section class="dashboard-section">
-            <h2 class="section-title">Interview Preparation</h2>
-            <div class="interview-item">
-                <p>Company: DataCrunch Solutions</p>
-                <button class="btn">Prepare</button>
+            <div class="application-item">
+                <h3>Applied for Marketing Intern at XYZ Ltd</h3>
+                <p>Status: Application Under Review</p>
             </div>
         </section>
-
-        <section class="dashboard-section">
-            <h2 class="section-title">Test & Quizes</h2>
-            <div class="interview-item">
-                <p>Create your own Customize Quizes </p>
-                
-                <a href="https://ats-1-8ksl.vercel.app/" class="btn">Start</a>
-                
-            </div>
-        </section>
-
-        <section class="dashboard-section">
-            <h2 class="section-title">Resume</h2>
-            <div class="resource-item">
-                <h3>Resume Template</h3>
-                <button class="btn">Download</button>
-            </div>
-            <div class="resource-item">
-                <h3>ATS Score</h3>
-                <a href="https://ats-1-8ksl.vercel.app/" class="btn">Calculate ATS</a>
-                
-            </div>
-        </section>
-
-        <section class="dashboard-section">
-            <h2 class="section-title">Feedback and Reviews</h2>
-            <button class="btn">View Company Feedback</button>
-            <button class="btn">View Peer Reviews</button>
-        </section>
-
-        <section class="dashboard-section">
-            <h2 class="section-title">Notifications and Alerts</h2>
-            <div class="notification-item">Application Status Updated</div>
-            <div class="notification-item">New Job Posting Alert</div>
-        </section>
-
-        <section class="dashboard-section">
-            <h2 class="section-title">Support and FAQs</h2>
-            <button class="btn">Help Center</button>
-            <button class="btn">Contact Support</button>
-        </section>
-
-        <section class="dashboard-section">
-            <h2 class="section-title">Networking and Collaboration</h2>
-            <button class="btn">Join Discussion Forum</button>
-            <button class="btn">View Mentorship Opportunities</button>
-        </section>
-    </div>
-   
+    </div>  
     
 
     <script>
