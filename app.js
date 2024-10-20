@@ -126,9 +126,26 @@ app.get("/login", (req, res) => {
 
 
 app.get("/updatedDash", isLoggedIn, async (req, res) => {
-  let user = await User.findOne({ username: req.session.user.username });
-  let profile = await StudentProfile.findOne({ owner: user._id });
-  res.render("updatedDash.ejs", { user, profile });
+  try {
+    let user = await User.findOne({ username: req.session.user.username });
+    if (!user) {
+      req.flash("error", "User not found");
+      return res.redirect("/login");
+    }
+
+    let profile = await StudentProfile.findOne({ owner: user._id });
+    if (!profile) {
+      // Create a new profile if it doesn't exist
+      profile = new StudentProfile({ owner: user._id });
+      await profile.save();
+    }
+
+    res.render("updatedDash.ejs", { user, profile });
+  } catch (error) {
+    console.error("Error in /updatedDash route:", error);
+    req.flash("error", "An error occurred. Please try again.");
+    res.redirect("/login");
+  }
 });
 
 app.post(
@@ -138,58 +155,92 @@ app.post(
     failureFlash: true,
   }),
   async (req, res) => {
-    let { username } = req.body;
-    req.session.user = { username };
-    let user = await User.findOne({ username: username });
-    let user1 = user;
-    let profile = await StudentProfile.findOne({ owner: user._id });
-    req.flash("success", "Welcome to Placement Management System!");
-    if (user.designation == "student") {
-      res.render("updatedDash.ejs", { user, user1, profile });
-    } else {
-      res.render("coordinator.ejs");
+    try {
+      let { username } = req.body;
+      req.session.user = { username };
+      let user = await User.findOne({ username: username });
+      if (!user) {
+        req.flash("error", "User not found");
+        return res.redirect("/login");
+      }
+
+      let profile = await StudentProfile.findOne({ owner: user._id });
+      if (!profile) {
+        // Create a new profile if it doesn't exist
+        profile = new StudentProfile({ owner: user._id });
+        await profile.save();
+      }
+
+      req.flash("success", "Welcome to Placement Management System!");
+      if (user.designation == "student") {
+        res.render("updatedDash.ejs", { user, profile });
+      } else {
+        res.render("coordinator.ejs");
+      }
+    } catch (error) {
+      console.error("Error in /login route:", error);
+      req.flash("error", "An error occurred. Please try again.");
+      res.redirect("/login");
     }
   }
 );
 
 app.post("/studentdash", async (req, res) => {
-  let { name, course, year, cgpa, backlog, resume } = req.body;
-  let user = await User.findOne({ username: req.session.user.username });
+  try {
+    let { name, course, year, cgpa, backlog, resume } = req.body;
+    let user = await User.findOne({ username: req.session.user.username });
+    if (!user) {
+      req.flash("error", "User not found");
+      return res.redirect("/login");
+    }
 
-  user = await User.findOneAndUpdate(
-    { username: req.session.user.username },
-    { name: name },
-    { new: true }
-  );
-  let profile = await StudentProfile.findOneAndUpdate({
-    owner: user._id,
-    course,
-    year,
-    cgpa,
-    backlog,
-    resume,
-  })
-  res.render("updatedDash.ejs", { user, profile });
+    user = await User.findOneAndUpdate(
+      { username: req.session.user.username },
+      { name: name },
+      { new: true }
+    );
+
+    let profile = await StudentProfile.findOneAndUpdate(
+      { owner: user._id },
+      { course, year, cgpa, backlog, resume },
+      { new: true, upsert: true } // This will create a new document if it doesn't exist
+    );
+
+    res.render("updatedDash.ejs", { user, profile });
+  } catch (error) {
+    console.error("Error in /studentdash route:", error);
+    req.flash("error", "An error occurred. Please try again.");
+    res.redirect("/updatedDash");
+  }
 });
 
 app.put("/updatedDash", async (req, res) => {
-  let { name, course, year, cgpa, backlog, resume } = req.body;
-  let user = await User.findOne({ username: req.session.user.username });
+  try {
+    let { name, course, year, cgpa, backlog, resume } = req.body;
+    let user = await User.findOne({ username: req.session.user.username });
+    if (!user) {
+      req.flash("error", "User not found");
+      return res.redirect("/login");
+    }
 
-  user = await User.findOneAndUpdate(
-    { username: req.session.user.username },
-    { name: name },
-    { new: true }
-  );
+    user = await User.findOneAndUpdate(
+      { username: req.session.user.username },
+      { name: name },
+      { new: true }
+    );
 
-  // Make sure to fetch the updated profile after the update
-  let profile = await StudentProfile.findOneAndUpdate(
-    { owner: user._id },
-    { course, year, cgpa, backlog, resume },
-    { new: true }
-  );
+    let profile = await StudentProfile.findOneAndUpdate(
+      { owner: user._id },
+      { course, year, cgpa, backlog, resume },
+      { new: true, upsert: true } // This will create a new document if it doesn't exist
+    );
 
-  res.render("updatedDash.ejs", { user, profile });
+    res.render("updatedDash.ejs", { user, profile });
+  } catch (error) {
+    console.error("Error in /updatedDash PUT route:", error);
+    req.flash("error", "An error occurred. Please try again.");
+    res.redirect("/updatedDash");
+  }
 });
 
 
