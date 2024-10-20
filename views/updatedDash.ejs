@@ -167,30 +167,30 @@
                 <div class="profile-summary">
                     <div class="profile-item">
                         <label for="name"><strong>Name:</strong></label>
-                        <input type="text" id="name" name="name" value="<%= user.name %>">
+                        <input type="text" id="name" name="name" value="<%= user ? user.name : '' %>">
                     </div>
                     <div class="profile-item">
                         <label for="course"><strong>Course:</strong></label>
-                        <input type="text" id="course" name="course" value="<%= profile.course %>">
+                        <input type="text" id="course" name="course" value="<%= profile && profile.course ? profile.course : '' %>">
                     </div>
                 </div>
-
+                
                 <div class="profile-summary-row-2">
                     <div class="profile-item">
                         <label for="year"><strong>Year:</strong></label>
-                        <input type="text" id="year" name="year" value="<%= profile.year %>">
+                        <input type="text" id="year" name="year" value="<%= profile && profile.year ? profile.year : '' %>">
                     </div>
                     <div class="profile-item">
                         <label for="cgpa"><strong>CGPA:</strong></label>
-                        <input type="text" id="cgpa" name="cgpa" value="<%= profile.cgpa %>">
+                        <input type="text" id="cgpa" name="cgpa" value="<%= profile && profile.cgpa ? profile.cgpa : '' %>">
                     </div>
                     <div class="profile-item">
                         <label for="backlogs"><strong>No of Backlogs:</strong></label>
-                        <input type="text" id="backlogs" name="backlog" value="<%= profile.backlog %>">
+                        <input type="text" id="backlogs" name="backlog" value="<%= profile && profile.backlog ? profile.backlog : '' %>">
                     </div>
                     <div class="profile-item">
                         <label for="resumeLink"><strong>Resume Link:</strong></label>
-                        <input type="text" id="resumeLink" name="resume" value="<%= profile.resume %>">
+                        <input type="text" id="resumeLink" name="resume" value="<%= profile && profile.resume ? profile.resume : '' %>">
                     </div>
                 </div>
 
